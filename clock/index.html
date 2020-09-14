@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="site.css">
+</head>
+
+<body>
+    <div id=main>
+        <div id="point"></div>
+        <div>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+            <span class="item"></span>
+        </div>
+        <div>
+            <span id="hour" class="needle"></span>
+            <span id="min" class="needle"></span>
+            <span id="sec" class="needle"></span>
+        </div>
+        <div>
+            <span class="num" value=0>Ⅻ</span>
+            <span class="num" value=1>Ⅲ</span>
+            <span class="num" value=2>Ⅵ</span>
+            <span class="num" value=3>Ⅸ</span>
+        </div>
+    </div>
+    <script>
+        var items = document.getElementsByClassName('item');
+        for (i = 0; i < items.length; i++) {
+            var item = items[i];
+            item.style.transform = "rotate(" + (i * 6) + "deg) translate(-50%,0)"
+            if (i % 15 == 0) {
+                item.style.border = '1.5px solid white';
+                item.style.height = "15px";
+            } else if (i % 5 == 0) {
+                item.style.border = '1px solid white';
+                item.style.height = "12.5px";
+            }
+        }
+        var nums = document.getElementsByClassName('num');
+        for (i = 0; i < nums.length; i++) {
+            var num = nums[i];
+            var value = parseInt(num.getAttribute('value'));
+            switch (value) {
+                case 0:
+                    num.style.left = '50%';
+                    num.style.transform = 'translate(-50%,25%)';
+                    break;
+                case 1:
+                    num.style.left = '100%';
+                    num.style.top = '50%';
+                    num.style.transform = 'translate(-150%,-50%)';
+                    break;
+                case 2:
+                    num.style.left = '50%';
+                    num.style.top = '100%';
+                    num.style.transform = 'translate(-50%,-125%)';
+                    break;
+                case 3:
+                    num.style.top = '50%';
+                    num.style.transform = 'translate(50%,-50%)';
+                    break;
+            }
+
+        }
+        var secDom = document.getElementById('sec');
+        var minDom = document.getElementById('min');
+        var hourDom = document.getElementById('hour');
+        var secTurn = 0;
+        var minTurn = 0;
+        var hourTurn = 0;
+        setInterval(function () {
+            var date = new Date();
+            var sec = date.getSeconds();
+            var min = date.getMinutes();
+            var hour = date.getHours();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            secDom.style.transform = 'translate(-50%,-100%) rotate(' + (secTurn * 360 + (sec + 1) * 6) + 'deg)';
+            minDom.style.transform = 'translate(-50%,-100%) rotate(' + (minTurn * 360 + min * 6 + (sec + 1) *
+                    0.1) +
+                'deg)';
+            hourDom.style.transform = 'translate(-50%,-100%) rotate(' + (hourTurn * 360 + hour * 30 + min *
+                0.5) + 'deg)';
+            if (sec == 59)
+                secTurn++;
+            if (min == 59)
+                minTurn++;
+            if (hour == 23)
+                hourTurn++;
+        }, 1000)
+    </script>
+</body>
+
+</html>
